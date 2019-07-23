@@ -1,4 +1,20 @@
 ---
+- name: enable overcommit in sysctl
+  sysctl:
+    name: vm.overcommit_memory
+    value: "1"
+    state: present
+    reload: yes
+    ignoreerrors: yes
+
+- name: Set somaxconn
+  sysctl:
+    name: net.core.somaxconn
+    value: "512"
+    state: present
+    reload: yes
+    ignoreerrors: yes
+
 - name: Install server and sentinel
   apt:
     name: "{{ packages }}"
@@ -8,10 +24,4 @@
     - redis-server
     - redis-sentinel
 
-- name: enable overcommit in sysctl
-  sysctl:
-    name: vm.overcommit_memory
-    value: 1
-    state: present
-    reload: yes
-    ignoreerrors: yes
+
