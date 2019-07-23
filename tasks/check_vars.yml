@@ -1,0 +1,12 @@
+---
+- name: check for ansible version less than 2.7
+  fail:
+    msg: >
+        Minimum Ansible version is 2.7
+  when:
+    - ansible_version.full < "2.7"
+
+
+- name: print ansible_version
+  debug:
+    msg: "version = {{ ansible_version }}"

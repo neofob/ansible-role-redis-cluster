@@ -1,0 +1,13 @@
+---
+# tasks file for ansible-role-redis-cluster
+
+- include: check_vars.yml
+- include: setup_repo.yml
+  tags:
+    - repo
+- include: install_server.yml
+  tags:
+    - install
+- include: config_server.yml
+  tags:
+    - configuration

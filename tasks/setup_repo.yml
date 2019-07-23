@@ -1,0 +1,7 @@
+---
+- name: Add chris-lea redis repo
+  apt_repository:
+    repo: 'ppa:chris-lea/redis-server'
+    state: present
+    update_cache: true
+  register: redis_server_ppa_added
