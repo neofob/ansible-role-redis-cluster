@@ -1,9 +1,15 @@
 ---
+# How frequently to snapshot the database to disk
+# e.g. "900 1" => 900 seconds if at least 1 key changed
+redis_save:
+  - 900 1
+  - 300 10
+  - 60 10000
 
 # In DO, eth0 is public, eth1 is private network
 redis_master_if: "eth1"
 
-redis_bind: "127.0.0.1 ::1"
+redis_bind: "0.0.0.0"
 redis_protected_mode: "yes"
 redis_port: 6379
 redis_tcp_backlog: 511
@@ -53,7 +59,7 @@ redis_latency_monitor_threshold: 0
 redis_notify_keyspace_events: ""
 redis_hash_max_ziplist_entries: 512
 redis_hash_max_ziplist_value: 64
-redis_list_max_ziplist_size: _2
+redis_list_max_ziplist_size: -2
 redis_list_compress_depth: 0
 
 redis_set_max_intset_entries: 512
@@ -64,7 +70,9 @@ redis_stream_node_max_bytes: 4096
 redis_stream_node_max_entries: 100
 
 redis_activerehashing: "yes"
-redis_client_output_buffer_limit: normal 0 0 0
+redis_client_output_buffer_limit_normal: 0 0 0
+redis_client_output_buffer_limit_slave: 256mb 64mb 60
+redis_client_output_buffer_limit_pubsub: 32mb 8mb 60
 
 redis_hz: 10
 redis_dynamic_hz: "yes"

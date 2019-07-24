@@ -15,6 +15,10 @@ loglevel {{ redis_loglevel }}
 logfile {{ redis_logfile }}
 
 databases {{ redis_databases }}
+{% for save in redis_save -%}
+save {{ save }}
+{% endfor -%}
+
 always-show-logo {{ redis_always_show_logo }}
 stop-writes-on-bgsave-error {{ redis_stop_writes_on_bgsave_error }}
 rdbcompression {{ redis_rdbcompression }}
@@ -24,50 +28,50 @@ dbfilename {{ redis_dbfilename }}
 dir {{ redis_dir }}
 replica-serve-stale-data {{ redis_replica_serve_stale_data }}
 replica-read-only {{ redis_replica_read_only }}
-repl-diskless-sync no
+repl-diskless-sync {{ redis_repl_diskless_sync }}
 
-repl-diskless-sync-delay 5
-repl-disable-tcp-nodelay no
-replica-priority 100
-lazyfree-lazy-eviction no
-lazyfree-lazy-expire no
+repl-diskless-sync-delay {{ redis_repl_diskless_sync_delay }}
+repl-disable-tcp-nodelay {{ redis_repl_disable_tcp_nodelay }}
+replica-priority {{ redis_replica_priority }}
+lazyfree-lazy-eviction {{ redis_lazyfree_lazy_eviction }}
+lazyfree-lazy-expire {{ redis_lazyfree_lazy_expire }}
 
-lazyfree-lazy-server-del no
-replica-lazy-flush no
-appendonly no
-appendfilename "appendonly.aof"
-appendfsync everysec
+lazyfree-lazy-server-del {{ redis_lazyfree_lazy_server_del }}
+replica-lazy-flush {{ redis_replica_lazy_flush }}
+appendonly {{ redis_appendonly }}
+appendfilename {{ redis_appendfilename }}
+appendfsync {{ redis_appendfsync }}
 
-no-appendfsync-on-rewrite no
-auto-aof-rewrite-percentage 100
-auto-aof-rewrite-min-size 64mb
-aof-load-truncated yes
-aof-use-rdb-preamble yes
+no-appendfsync-on-rewrite {{ redis_no_appendfsync_on_rewrite }}
+auto-aof-rewrite-percentage {{ redis_auto_aof_rewrite_percentage }}
+auto-aof-rewrite-min-size {{ redis_auto_aof_rewrite_min_size }}
+aof-load-truncated {{ redis_aof_load_truncated }}
+aof-use-rdb-preamble {{ redis_aof_use_rdb_preamble }}
 
-lua-time-limit 5000
-slowlog-log-slower-than 10000
-slowlog-max-len 128
-latency-monitor-threshold 0
-notify-keyspace-events ""
+lua-time-limit {{ redis_lua_time_limit }}
+slowlog-log-slower-than {{ redis_slowlog_log_slower_than }}
+slowlog-max-len {{ redis_slowlog_max_len }}
+latency-monitor-threshold {{ redis_latency_monitor_threshold }}
+notify-keyspace-events "{{ redis_notify_keyspace_events }}"
 
-hash-max-ziplist-entries 512
-hash-max-ziplist-value 64
-list-max-ziplist-size -2
-list-compress-depth 0
-set-max-intset-entries 512
+hash-max-ziplist-entries {{ redis_hash_max_ziplist_entries }}
+hash-max-ziplist-value {{ redis_hash_max_ziplist_value }}
+list-max-ziplist-size {{ redis_list_max_ziplist_size }}
+list-compress-depth {{ redis_list_compress_depth }}
+set-max-intset-entries {{ redis_set_max_intset_entries }}
 
-zset-max-ziplist-entries 128
-zset-max-ziplist-value 64
-hll-sparse-max-bytes 3000
-stream-node-max-bytes 4096
-stream-node-max-entries 100
+zset-max-ziplist-entries {{ redis_zset_max_ziplist_entries }}
+zset-max-ziplist-value {{ redis_zset_max_ziplist_value }}
+hll-sparse-max-bytes {{ redis_hll_sparse_max_bytes }}
+stream-node-max-bytes {{ redis_stream_node_max_bytes }}
+stream-node-max-entries {{ redis_stream_node_max_entries }}
 
-activerehashing yes
-client-output-buffer-limit normal 0 0 0
-client-output-buffer-limit replica 256mb 64mb 60
-client-output-buffer-limit pubsub 32mb 8mb 60
-hz 10
+activerehashing {{ redis_activerehashing }}
+client-output-buffer-limit normal {{ redis_client_output_buffer_limit_normal }}
+client-output-buffer-limit slave {{ redis_client_output_buffer_limit_slave }}
+client-output-buffer-limit pubsub {{ redis_client_output_buffer_limit_pubsub }}
+hz {{ redis_hz }}
 
-dynamic-hz yes
-aof-rewrite-incremental-fsync yes
-rdb-save-incremental-fsync yes
+dynamic-hz {{ redis_dynamic_hz }}
+aof-rewrite-incremental-fsync {{ redis_aof_rewrite_incremental_fsync }}
+rdb-save-incremental-fsync {{ redis_rdb_save_incremental_fsync }}
