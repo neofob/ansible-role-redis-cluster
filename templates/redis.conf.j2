@@ -26,6 +26,12 @@ rdbchecksum {{ redis_rdbchecksum }}
 
 dbfilename {{ redis_dbfilename }}
 dir {{ redis_dir }}
+
+# Replication
+{% if redis_replicaof -%}
+replicaof {{ redis_replicaof }}
+{% endif -%}
+
 replica-serve-stale-data {{ redis_replica_serve_stale_data }}
 replica-read-only {{ redis_replica_read_only }}
 repl-diskless-sync {{ redis_repl_diskless_sync }}
