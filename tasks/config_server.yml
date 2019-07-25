@@ -5,8 +5,7 @@
     dest: /etc/redis/redis.conf
   notify: restart redis server
 
-#- name: Configure redis sentinel
-#  template:
-#    src: sentinel.conf.j2
-#    dest: /etc/redis/sentinel.conf
-
+- name: Configure redis sentinel
+  template:
+    src: sentinel.conf.j2
+    dest: /etc/redis/sentinel.conf
