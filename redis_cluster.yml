@@ -1,0 +1,10 @@
+---
+- hosts: redis_master
+  roles:
+    - ../ansible-role-redis-cluster
+
+- hosts: redis_replica
+  vars:
+    - redis_replicaof: "redis-master 6379"
+  roles:
+    - ../ansible-role-redis-cluster
